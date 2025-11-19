@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSA: Cortex-M Breakage (LLD as the default linker) | Rust Embedded Working Group</title>
+  <meta name="title" content="PSA: Cortex-M Breakage (LLD as the default linker)">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link rel="alternate" type="application/rss+xml" title="Rust Embedded Working Group" href="https://trappitsch.github.io/rust-embedded-www/rss.xml">
+  <style>
+    :root {
+    --width: 800px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #303030;
+    --text-color: #515151;
+    --link-color: #268BD2;
+    --visited-color: #268BD2;
+    <!-- --code-background-color: #f2f2f2; -->
+    <!-- --code-color: #e00; -->
+    --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #202020;
+      --heading-color: #EEEEEE;
+      --text-color: #FFFFFF;
+      --link-color: #6ACFF6;
+      --visited-color: #6ACFF6;
+      <!-- --code-background-color: #000000; -->
+      <!-- --code-color: #0e0; -->
+      --blockquote-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  nav span.active {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    display: block;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  /* blog post list */
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .tags {
+    font-size: smaller;
+  }
+
+  .footnote-definition {
+    display: flex;
+    margin-top: 1em;
+  }
+  .footnote-definition-label {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
+  }
+  .footnote-definition-label::after {
+    content: "."
+  }
+  .footnote-definition > p {
+    margin: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/blog/">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>PSA: Cortex-M Breakage (LLD as the default linker)</h1>
+      <p>
+        <i>
+          <time datetime="2018-08-28T00:00:00+00:00" pubdate>2018-08-28</time>
+        </i>
+      </p>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/2018-08-2x-psa-cortex-m-breakage/#rationale">Rationale</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/2018-08-2x-psa-cortex-m-breakage/#how-to-fix-your-build">How to fix your build</a>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <p>The default linker for the 4 ARM Cortex-M targets listed below has changed from
+<code>arm-none-eabi-gcc</code> to <code>rust-lld</code> in the latest nightly.</p>
+<ul>
+<li><code>thumbv6m-none-eabi</code></li>
+<li><code>thumbv7m-none-eabi</code></li>
+<li><code>thumbv7em-none-eabi</code></li>
+<li><code>thumbv7em-none-eabihf</code></li>
+</ul>
+<p>This will break the builds of <em>binaries</em> and <em>cdylibs</em> that were using the
+old default linker (<code>arm-none-eabi-gcc</code>) <em>and</em> additionally pass extra flags to
+the linker using any of these rustc flags: <code>-C link-arg</code>, <code>-C link-args</code>, <code>-Z pre-link-arg</code> or <code>-Z pre-link-args</code>. Building libraries (<code>rlib</code>s and
+<code>staticlib</code>s) is not affected by this change.</p>
+<span id="continue-reading"></span>
+<p>This change won't affect stable users when it reaches the 1.30 release because,
+as of 1.28, it's not possible to build binaries or cdylibs for those targets on
+the stable channel. Building libraries for those targets is possible on stable
+but it's not affected by this change.</p>
+<h3 id="rationale">Rationale</h3>
+<p>This breaking change was intentional.</p>
+<p>We, the <a href="https://github.com/rust-embedded/wg">embedded WG</a>, wanted to reduce the number of external tools required to
+build embedded programs for the ARM Cortex-M architecture. By switching the
+default linker to the LLD linker that's shipped with the Rust toolchain the user
+no longer needs to install an ARM linker (like <code>arm-none-eabi-gcc</code> or
+<code>arm-none-eabi-ld</code>) to build Rust programs.</p>
+<p>Before landing this change we first <a href="https://github.com/rust-embedded/wg/issues/160">consulted</a> with the community if they
+thought this breaking change was worth it. We received over 20 positive responses
+representing the Cortex-M team (part of the embedded WG), the Tock OS project,
+the embed-rs organization and independent developers.</p>
+<p>The consensus was that it was worth to make the default configuration more self
+contained and that if we were to make the change it had to be made before it
+became possible to build binaries on stable otherwise it wouldn't be possible
+to make this change without breaking stable builds.</p>
+<h3 id="how-to-fix-your-build">How to fix your build</h3>
+<p>If you are affected by this change you'll observe a linker error with a message
+similar to one shown below:</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$ </span><span style="color:#6272a4;"># these are the custom linker flags of the project
+</span><span style="color:#50fa7b;">$</span><span> cat .cargo/config
+</span></code></pre>
+<pre data-lang="toml" style="background-color:#282a36;color:#f8f8f2;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[target.thumbv7m-none-eabi]
+</span><span style="color:#ff79c6;">runner </span><span>= </span><span style="color:#f1fa8c;">&#39;arm-none-eabi-gdb&#39;
+</span><span style="color:#ff79c6;">rustflags </span><span>= [
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;link-arg=-Wl,-Tlink.x&quot;</span><span>,
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;link-arg=-nostartfiles&quot;</span><span>,
+</span><span>]
+</span><span>
+</span><span>[build]
+</span><span style="color:#ff79c6;">target </span><span>= </span><span style="color:#f1fa8c;">&quot;thumbv7m-none-eabi&quot;
+</span></code></pre>
+<pre style="background-color:#282a36;color:#f8f8f2;"><code><span>$ cargo build
+</span><span>error: linking with `rust-lld` failed: exit code: 1
+</span><span>  |
+</span><span>  = note: &quot;rust-lld&quot; &quot;-flavor&quot; &quot;gnu&quot; (..)
+</span><span>  = note: rust-lld: error: unknown argument: -Wl,-Tlink.x
+</span><span>          rust-lld: error: unknown argument: -nostartfiles
+</span></code></pre>
+<p>There are two ways to fix the problem.</p>
+<h4 id="option-a-switch-back-to-gcc">Option A: switch back to GCC</h4>
+<p>The easiest way is to switch back to using <code>arm-none-eabi-gcc</code> as the linker. To
+do so pass the flag <code>-C linker=arm-none-eabi-gcc</code> to rustc. In the above example
+you can do that in the <code>.cargo/config</code> file.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$ </span><span style="color:#6272a4;"># these are the custom linker flags of the project
+</span><span style="color:#50fa7b;">$</span><span> cat .cargo/config
+</span></code></pre>
+<pre data-lang="toml" style="background-color:#282a36;color:#f8f8f2;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[target.thumbv7m-none-eabi]
+</span><span style="color:#ff79c6;">runner </span><span>= </span><span style="color:#f1fa8c;">&#39;arm-none-eabi-gdb&#39;
+</span><span style="color:#ff79c6;">rustflags </span><span>= [
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;linker=arm-none-eabi-gcc&quot;</span><span>, </span><span style="color:#6272a4;"># ADDED
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;link-arg=-Wl,-Tlink.x&quot;</span><span>,
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;link-arg=-nostartfiles&quot;</span><span>,
+</span><span>]
+</span><span>
+</span><span>[build]
+</span><span style="color:#ff79c6;">target </span><span>= </span><span style="color:#f1fa8c;">&quot;thumbv7m-none-eabi&quot;
+</span></code></pre>
+<pre style="background-color:#282a36;color:#f8f8f2;"><code><span>$ cargo build &amp;&amp; echo It works now
+</span><span>It works now
+</span></code></pre>
+<h4 id="option-b-tweak-the-additional-linker-arguments">Option B: tweak the additional linker arguments</h4>
+<p>The other option is to tweak the additional linker arguments so they'll be
+accepted by LLD. In the above example the <code>-nostartfiles</code> flag can be dropped
+because that's the default behavior of LLD, and the flags prefixed by <code>-Wl,</code>
+will have to lose their prefix.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$ </span><span style="color:#6272a4;"># these are the custom linker flags of the project
+</span><span style="color:#50fa7b;">$</span><span> cat .cargo/config
+</span></code></pre>
+<pre data-lang="toml" style="background-color:#282a36;color:#f8f8f2;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[target.thumbv7m-none-eabi]
+</span><span style="color:#ff79c6;">runner </span><span>= </span><span style="color:#f1fa8c;">&#39;arm-none-eabi-gdb&#39;
+</span><span style="color:#ff79c6;">rustflags </span><span>= [
+</span><span>  </span><span style="color:#f1fa8c;">&quot;-C&quot;</span><span>, </span><span style="color:#f1fa8c;">&quot;link-arg=-Tlink.x&quot;</span><span>, </span><span style="color:#6272a4;"># CHANGED
+</span><span style="color:#6272a4;"># &quot;-C&quot;, &quot;link-arg=-nostartfiles&quot;, # REMOVED
+</span><span>]
+</span><span>
+</span><span>[build]
+</span><span style="color:#ff79c6;">target </span><span>= </span><span style="color:#f1fa8c;">&quot;thumbv7m-none-eabi&quot;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$</span><span> cargo build </span><span style="color:#ff79c6;">&amp;&amp; </span><span style="color:#8be9fd;">echo</span><span> It works now
+</span><span style="color:#50fa7b;">It</span><span> works now
+</span></code></pre>
+<p>With this approach your build will no longer depend on an external linker.</p>
+<h4 id="should-i-prefer-option-a-or-b">Should I prefer option A or B?</h4>
+<p>If you are linking to a system installed C library like <code>newlib-arm-none-eabi</code>
+then you should continue to use GCC. The default library search path of
+<code>arm-none-eabi-gcc</code> includes the path to those libraries.</p>
+<p>If you are not linking to any C code then you should prefer LLD then you won't
+need to install the <code>arm-none-eabi</code> toolchain.</p>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">[m]</a>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+    <a href="https://trappitsch.github.io/rust-embedded-www/rss.xml" target="_blank">
+      <i class="fa-solid fa-rss"></i>
+    </a>
+
+</footer>
+</body>
+</html>

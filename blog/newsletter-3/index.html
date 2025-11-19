@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Embedded Working Group Newsletter - 3 | Rust Embedded Working Group</title>
+  <meta name="title" content="The Embedded Working Group Newsletter - 3">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link rel="alternate" type="application/rss+xml" title="Rust Embedded Working Group" href="https://trappitsch.github.io/rust-embedded-www/rss.xml">
+  <style>
+    :root {
+    --width: 800px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #303030;
+    --text-color: #515151;
+    --link-color: #268BD2;
+    --visited-color: #268BD2;
+    <!-- --code-background-color: #f2f2f2; -->
+    <!-- --code-color: #e00; -->
+    --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #202020;
+      --heading-color: #EEEEEE;
+      --text-color: #FFFFFF;
+      --link-color: #6ACFF6;
+      --visited-color: #6ACFF6;
+      <!-- --code-background-color: #000000; -->
+      <!-- --code-color: #0e0; -->
+      --blockquote-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  nav span.active {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    display: block;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  /* blog post list */
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .tags {
+    font-size: smaller;
+  }
+
+  .footnote-definition {
+    display: flex;
+    margin-top: 1em;
+  }
+  .footnote-definition-label {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
+  }
+  .footnote-definition-label::after {
+    content: "."
+  }
+  .footnote-definition > p {
+    margin: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/blog/">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>The Embedded Working Group Newsletter - 3</h1>
+      <p>
+        <i>
+          <time datetime="2018-04-14T00:00:00+00:00" pubdate>2018-04-14</time>
+        </i>
+      </p>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-3/#highlights">Highlights</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-3/#embedded-projects">Embedded Projects</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-3/#help-wanted">Help Wanted</a>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <p>This is the third bi-weekly newsletter of the <a href="https://github.com/rust-lang-nursery/embedded-wg">Embedded WG</a> where we highlight new progress, celebrate cool projects, thank the community, and advertise projects that need help!</p>
+<span id="continue-reading"></span>
+<p>If you want to mention something in <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/84">the next newsletter</a>, make sure to leave a comment on the issue.</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li>Crates for the Embedded Rust Ecosystem are now being tracked in the <a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a> repository</li>
+<li>Progress has been made as part of the <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/42">Embedded Rust on Stable</a> initiative, including:
+<ul>
+<li><code>extern crate compiler_builtins</code> is <a href="https://users.rust-lang.org/t/psa-breaking-change-extern-crate-compiler-builtins-is-now-included-in-no-std-crates/16704">now included in the no_std prelude</a></li>
+<li><a href="https://users.rust-lang.org/t/psa-you-no-longer-need-xargo-to-do-arm-cortex-m-development/16703">xargo no longer needed</a> for ARM Cortex-M development</li>
+</ul>
+</li>
+<li>We also made some progress on simplifying the embedded development setup: You can now link Embedded Rust programs <a href="https://users.rust-lang.org/t/cortex-m-rt-v0-4-0-now-you-can-link-arm-cortex-m-programs-using-lld/16751">using lld</a></li>
+<li><a href="https://github.com/ithinuel">Wilfried</a> kicked off a blog series about <a href="http://ithinuel.me/embedded-rust-why/">using embedded rust</a></li>
+<li><a href="https://github.com/andre-richter">Andre Richter</a> is writing a tutorial for using Rust to write <a href="https://github.com/andre-richter/rust-raspi3-tutorial">bare metal Raspberry Pi 3</a> applications</li>
+<li>The Embedonomicon and the Embedded Rust Books are <a href="https://github.com/rust-lang-nursery/embedded-wg/pull/78">now kept</a> in the <a href="https://github.com/rust-lang-nursery/embedded-wg">Embedded WG</a> repository, and pull requests are welcome!</li>
+</ul>
+<h2 id="embedded-projects">Embedded Projects</h2>
+<p>If you have an embedded project or blog post you would like to have featured in the Embedded WG Newsletter, make sure to mention it on the tracking issue for <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/84">the next newsletter</a>, we would love to show it off!</p>
+<ul>
+<li><a href="https://github.com/japaric">japaric</a> released an initial version of <a href="https://github.com/japaric/cargo-binutils">cargo-binutils</a>, which will allow you to use LLVM's binutils (like <code>nm</code>, <code>size</code>, <code>objcopy</code>, etc.) in the format <code>cargo objcopy</code> (once <a href="https://github.com/rust-lang/rust/issues/49584">issue 49584</a> has landed)</li>
+<li><a href="https://github.com/myeisha">myeisha</a> released the first version of their <a href="https://crates.io/crates/thumb2-stack-size">thumb2-stack-size</a> tool, which helps determine the maximum stack size used in embedded code</li>
+</ul>
+<h3 id="embedded-hal-ecosystem-crates"><code>embedded-hal</code> Ecosystem Crates</h3>
+<p>As part of the <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/39">Weekly Driver Initiative</a>, crates that are part of the <code>embedded-hal</code> ecosystem are now tracked in the <a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a> repository. Here is a current snapshot of what is available there:</p>
+<table><thead><tr><th style="text-align: left">Type</th><th style="text-align: left">Status</th><th style="text-align: left">Count</th></tr></thead><tbody>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#device-crates">Device Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">13</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates">HAL Impl Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">10</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#driver-crates">Driver Crates Released</a></td><td style="text-align: left">released</td><td style="text-align: left">7</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#wip">Driver Crates WIP</a></td><td style="text-align: left">WIP</td><td style="text-align: left">26</td></tr>
+</tbody></table>
+<h2 id="help-wanted">Help Wanted</h2>
+<ul>
+<li>We need help working on <a href="https://github.com/rust-lang/rust/issues/44489#issuecomment-381324623">RFC2070</a>, stabilizing usage of custom Panic behavior. <a href="https://github.com/nagisa">nagisa</a> is willing to mentor!</li>
+<li>If you use inline assembly in your Embedded Rust programs, help us capture what assembly operations are <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/63#issue-305114817">used most often</a> so we can stabilize them as intrinsics</li>
+</ul>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">[m]</a>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+    <a href="https://trappitsch.github.io/rust-embedded-www/rss.xml" target="_blank">
+      <i class="fa-solid fa-rss"></i>
+    </a>
+
+</footer>
+</body>
+</html>

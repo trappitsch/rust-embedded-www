@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Embedded Working Group Newsletter - 24 | Rust Embedded Working Group</title>
+  <meta name="title" content="The Embedded Working Group Newsletter - 24">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link rel="alternate" type="application/rss+xml" title="Rust Embedded Working Group" href="https://trappitsch.github.io/rust-embedded-www/rss.xml">
+  <style>
+    :root {
+    --width: 800px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #303030;
+    --text-color: #515151;
+    --link-color: #268BD2;
+    --visited-color: #268BD2;
+    <!-- --code-background-color: #f2f2f2; -->
+    <!-- --code-color: #e00; -->
+    --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #202020;
+      --heading-color: #EEEEEE;
+      --text-color: #FFFFFF;
+      --link-color: #6ACFF6;
+      --visited-color: #6ACFF6;
+      <!-- --code-background-color: #000000; -->
+      <!-- --code-color: #0e0; -->
+      --blockquote-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  nav span.active {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    display: block;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  /* blog post list */
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .tags {
+    font-size: smaller;
+  }
+
+  .footnote-definition {
+    display: flex;
+    margin-top: 1em;
+  }
+  .footnote-definition-label {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
+  }
+  .footnote-definition-label::after {
+    content: "."
+  }
+  .footnote-definition > p {
+    margin: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/blog/">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>The Embedded Working Group Newsletter - 24</h1>
+      <p>
+        <i>
+          <time datetime="2020-08-17T00:00:00+00:00" pubdate>2020-08-17</time>
+        </i>
+      </p>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-24/#the-great-catch-up">The Great Catch-Up!</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-24/#embedded-hal-ecosystem-crates">embedded-hal Ecosystem Crates</a>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <p>This is the 24th newsletter of the <a href="https://github.com/rust-embedded/wg">Embedded WG</a> where we highlight new progress, celebrate cool projects, thank the community, and advertise projects that need help!</p>
+<p>We've been on an unscheduled hiatus for the past six months or so, but it's time for us to return! Today we're doing a quick fast-forward of all of the great things that have been released while we've been on break.</p>
+<p>For the next few weeks, we'll be doing a special "catch-up" schedule, meaning we'll be releasing articles weekly until we've caught up with all of the recent changes. Once we've wrapped that up, we'll go back to a regular monthly cadence.</p>
+<p>We've also added a few new folks to the <a href="https://github.com/rust-embedded/wg#the-resources-team">resources team</a> say hello to <a href="https://github.com/hargonix/">@hargoniX</a>, <a href="https://github.com/eldruin">@eldruin</a> and <a href="https://github.com/kalkyl">@kalkyl</a> who will be helping out with the newsletter!</p>
+<p>Want to have your project mentioned? Make sure you <a href="https://github.com/rust-embedded/blog/edit/master/content/2020-08-24-newsletter-25.md">let us know</a> so we can include it!</p>
+<p>Discuss on <a href="https://matrix.to/#/#rust-embedded:matrix.org">#rust-embedded:matrix.org</a>, <a href="https://users.rust-lang.org/t/the-embedded-working-group-newsletter-24/47405">users.rust-lang.org</a>, <a href="https://twitter.com/rustembedded/status/1295330780688809986">on twitter</a>, or <a href="https://www.reddit.com/r/rust/comments/ibcvnz/the_embedded_working_group_newsletter_24/">on reddit</a>!</p>
+<span id="continue-reading"></span>
+<p>If you want to mention something in <a href="https://github.com/rust-embedded/blog/edit/master/content/2020-08-24-newsletter-25.md">the next newsletter</a>, send us a pull request!</p>
+<h2 id="the-great-catch-up">The Great Catch-Up!</h2>
+<p>Here's a whirlwind overview of some of the things that have been released and changed over the past six months or so!
+We'll cover some of these updates in more detail over the coming weeks!</p>
+<h3 id="renames">Renames</h3>
+<ul>
+<li>The RTFM framework has been renamed to RTIC - Real Time Interrupt-driven Concurrency!</li>
+</ul>
+<h3 id="resources">Resources</h3>
+<ul>
+<li>We've added <a href="https://os.phil-opp.com/">phil's OS blog</a> to our list of resources</li>
+<li><a href="https://github.com/hargonix">@hargoniX</a> has added a blog post on <a href="https://hboeving.dev/blog/rust-2c-driver-p1/">embedded driver writing</a></li>
+</ul>
+<h3 id="tooling">Tooling</h3>
+<ul>
+<li>the <a href="https://probe.rs">probe-rs organization</a> has added a lot of wonderful new tooling, including <a href="https://crates.io/crates/cargo-flash">cargo-flash</a> and <a href="https://crates.io/crates/cargo-embed">cargo-embed</a></li>
+<li><a href="https://crates.io/crates/cargo-hf2">cargo-hf2</a> for "A small cargo subcommand to download cargo builds to Microsoft UF2 bootloaders via HID USB"</li>
+<li>The <a href="https://github.com/knurling-rs/meta">Knurling-rs</a> project for embedded tooling has kicked off by releasing <a href="https://github.com/knurling-rs/probe-run">probe-run</a></li>
+</ul>
+<h3 id="bindings">Bindings</h3>
+<ul>
+<li><a href="https://crates.io/crates/freertos-rust">FreeRTOS-rust</a> as RTOS bindings (not to be confused with <a href="https://crates.io/crates/freertos_rs">FreeRTOS.rs</a> )</li>
+</ul>
+<h3 id="new-possibilities">New Possibilities</h3>
+<ul>
+<li>It is <a href="https://ferrous-systems.com/blog/stable-async-on-embedded/">now possible</a> to run <a href="https://blog.rust-lang.org/2020/06/04/Rust-1.44.0.html">async/await on embedded</a>!</li>
+<li>Applications can now be compiled for <a href="https://github.com/rust-lang/rust/issues/44052#issuecomment-663394401">AVR in mainline Rust nightly builds</a>!</li>
+</ul>
+<h3 id="pacs">PACs</h3>
+<ul>
+<li><a href="https://crates.io/crates/msp430fr2355">msp430fr2355 PAC</a> has been added</li>
+<li><a href="https://crates.io/crates/ambiq-apollo1-pac">ambiq-apollo1-pac</a>, <a href="https://crates.io/crates/ambiq-apollo2-pac">ambiq-apollo2-pac</a> and <a href="https://crates.io/crates/ambiq-apollo3p-pac">ambiq-apollo3p-pac</a> have been added</li>
+</ul>
+<h3 id="hals">HALs</h3>
+<ul>
+<li><a href="https://crates.io/crates/msp430fr2x5x-hal">msp430fr2x5x-hal</a> has been added</li>
+</ul>
+<h3 id="bsps">BSPs</h3>
+<ul>
+<li>a <a href="https://crates.io/crates/onebitsy">BSP for the onebitsy</a></li>
+<li>Several Adafruit BSPs:
+<ul>
+<li><a href="https://crates.io/crates/metro_m0">metro_m0</a></li>
+<li><a href="https://crates.io/crates/pygamer">pygamer</a></li>
+<li><a href="https://crates.io/crates/feather-f405">feather-f405</a></li>
+<li><a href="https://crates.io/crates/feather_m0">feather_m0</a></li>
+<li><a href="https://crates.io/crates/feather_m4">feather_m4</a></li>
+<li><a href="https://crates.io/crates/circuit_playground_express">circuit_playground_express</a></li>
+<li><a href="https://crates.io/crates/edgebadge">edgebadge</a></li>
+<li><a href="https://crates.io/crates/gemma_m0">gemma_m0</a></li>
+<li><a href="https://crates.io/crates/itsybitsy_m0">itsybitsy_m0</a></li>
+<li><a href="https://crates.io/crates/itsybitsy_m4">itsybitsy_m4</a></li>
+<li><a href="https://crates.io/crates/trinket_m0">trinket_m0</a></li>
+</ul>
+</li>
+<li>Several arduino BSPs:
+<ul>
+<li><a href="https://crates.io/crates/arduino_mkrvidor4000">arduino_mkrvidor4000</a></li>
+<li><a href="https://crates.io/crates/arduino_mkrzero">arduino_mkrzero</a></li>
+<li><a href="https://crates.io/crates/arduino_nano33iot">arduino_nano33iot</a></li>
+</ul>
+</li>
+<li>The <a href="https://crates.io/crates/samd21_mini">samd21_mini BSP</a></li>
+<li>The <a href="https://crates.io/crates/xiao_m0">xiao_m0 BSP</a></li>
+</ul>
+<h3 id="general-abstraction-crates">General abstraction crates</h3>
+<ul>
+<li>The <a href="https://github.com/BlackbirdHQ/atat">atat crate</a> for parsing AT commands</li>
+</ul>
+<h3 id="drivers">Drivers</h3>
+<ul>
+<li><a href="https://crates.io/crates/adxl313">ADXL313</a></li>
+<li><a href="https://crates.io/crates/anyleaf">AnyLeaf</a></li>
+<li><a href="https://crates.io/crates/dht-sensor">dht-sensor</a></li>
+<li><a href="https://crates.io/crates/max6955">MAX6955</a></li>
+<li><a href="https://crates.io/crates/microchip-eeprom-25lcxx">MCP25LCXX</a></li>
+<li><a href="https://crates.io/crates/microchip-tc72r-rs">TC72</a></li>
+<li><a href="http://crates.io/crates/st7789">ST7789</a></li>
+<li><a href="https://crates.io/crates/dw1000">DW1000</a></li>
+<li><a href="https://crates.io/crates/adafruit-7segment">Adafruit-7segment</a></li>
+</ul>
+<h3 id="wip-drivers">WIP Drivers</h3>
+<ul>
+<li><a href="https://crates.io/crates/bmi160">BMI160</a></li>
+<li><a href="https://crates.io/crates/epd-waveshare">epd-waveshare</a></li>
+<li><a href="https://crates.io/crates/hrs3300">HRS3300</a></li>
+<li><a href="https://crates.io/crates/hdc20xx">HDC20xx</a></li>
+<li><a href="https://crates.io/crates/isl29125">ISL29125</a></li>
+<li><a href="https://crates.io/crates/lsm9ds1">LSM9DS1</a></li>
+<li><a href="https://crates.io/crates/ltr-559">ltr-559</a></li>
+<li><a href="https://github.com/rafaelcaricio/lvgl-rs">lvgl</a></li>
+<li><a href="https://github.com/eldruin/max170xx-rs">MAX170xx</a></li>
+<li><a href="https://crates.io/crates/max3010x">MAX3010x</a></li>
+<li><a href="https://crates.io/crates/mcp4725">MCP4725</a></li>
+<li><a href="https://crates.io/crates/mlx9061x">MLX9061x</a></li>
+<li><a href="https://github.com/BlackbirdHQ/ublox-cellular-rs">ublox-cellular-rs</a></li>
+</ul>
+<h3 id="no-std-crates">no_std crates</h3>
+<ul>
+<li><a href="https://crates.io/crates/debouncr">debouncr</a></li>
+<li><a href="https://crates.io/crates/embedded-crc-macros">embedded-crc-macros</a></li>
+<li><a href="https://crates.io/crates/embedded-websocket">embedded-websocket</a></li>
+<li><a href="https://crates.io/crates/endian_codec">endian_codec</a></li>
+<li><a href="https://crates.io/crates/gdbstub">gdbstub</a></li>
+<li><a href="https://crates.io/crates/microfft">microfft</a></li>
+<li><a href="https://crates.io/crates/smbus-pec">smbus-pec</a></li>
+</ul>
+<h2 id="embedded-hal-ecosystem-crates"><code>embedded-hal</code> Ecosystem Crates</h2>
+<p>As part of the <a href="https://github.com/rust-embedded/wg/issues/39">Weekly Driver Initiative</a>, crates that are part of the <code>embedded-hal</code> ecosystem are now tracked in the <a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a> repository. Here is a current snapshot of what is available there:</p>
+<table><thead><tr><th style="text-align: left">Type</th><th style="text-align: left">Status</th><th style="text-align: left">Count</th><th style="text-align: left">Diff</th></tr></thead><tbody>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#peripheral-access-crates">Peripheral Access Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">46</td><td style="text-align: left">+4</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates">HAL Impl Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">33</td><td style="text-align: left">+1</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#board-support-crates">Board Support Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">38</td><td style="text-align: left">+17</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#driver-crates">Driver Crates Released</a></td><td style="text-align: left">released</td><td style="text-align: left">45</td><td style="text-align: left">+9</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#wip">Driver Crates WIP</a></td><td style="text-align: left">WIP</td><td style="text-align: left">84</td><td style="text-align: left">+13</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#no-std-crates">no-std crates</a></td><td style="text-align: left">released</td><td style="text-align: left">41</td><td style="text-align: left">+7</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#wip-1">no-std crates WIP</a></td><td style="text-align: left">WIP</td><td style="text-align: left">3</td><td style="text-align: left">+0</td></tr>
+</tbody></table>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">[m]</a>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+    <a href="https://trappitsch.github.io/rust-embedded-www/rss.xml" target="_blank">
+      <i class="fa-solid fa-rss"></i>
+    </a>
+
+</footer>
+</body>
+</html>

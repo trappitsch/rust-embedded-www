@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Embedded Working Group Newsletter - 8 | Rust Embedded Working Group</title>
+  <meta name="title" content="The Embedded Working Group Newsletter - 8">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link rel="alternate" type="application/rss+xml" title="Rust Embedded Working Group" href="https://trappitsch.github.io/rust-embedded-www/rss.xml">
+  <style>
+    :root {
+    --width: 800px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #303030;
+    --text-color: #515151;
+    --link-color: #268BD2;
+    --visited-color: #268BD2;
+    <!-- --code-background-color: #f2f2f2; -->
+    <!-- --code-color: #e00; -->
+    --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #202020;
+      --heading-color: #EEEEEE;
+      --text-color: #FFFFFF;
+      --link-color: #6ACFF6;
+      --visited-color: #6ACFF6;
+      <!-- --code-background-color: #000000; -->
+      <!-- --code-color: #0e0; -->
+      --blockquote-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  nav span.active {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    display: block;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  /* blog post list */
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .tags {
+    font-size: smaller;
+  }
+
+  .footnote-definition {
+    display: flex;
+    margin-top: 1em;
+  }
+  .footnote-definition-label {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
+  }
+  .footnote-definition-label::after {
+    content: "."
+  }
+  .footnote-definition > p {
+    margin: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/blog/">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>The Embedded Working Group Newsletter - 8</h1>
+      <p>
+        <i>
+          <time datetime="2018-07-29T00:00:00+00:00" pubdate>2018-07-29</time>
+        </i>
+      </p>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-8/#highlights">Highlights</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-8/#embedded-projects">Embedded Projects</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-8/#help-wanted">Help Wanted</a>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <p>This is the eighth newsletter of the <a href="https://github.com/rust-lang-nursery/embedded-wg">Embedded WG</a> where we highlight new progress, celebrate cool projects, thank the community, and advertise projects that need help!</p>
+<span id="continue-reading"></span>
+<p>If you want to mention something in <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/134">the next newsletter</a>, make sure to leave a comment on the issue.</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li><a href="https://github.com/japaric/libm#libm">libm</a>, the <code>no_std</code> port of MUSL's math library led by <a href="https://github.com/japaric">japaric</a> has finished its' first release! It can now be used by embedded (or <code>wasm</code>!) targets that need support for math functions.</li>
+<li><a href="https://github.com/droogmic">droogmic</a> is working on <a href="https://droogmic.github.io/microrust">microrust</a>, a port of <a href="https://github.com/japaric">japaric</a>'s Discovery book for the BBC MicroBit, based on the Nordic nRF51</li>
+<li><a href="https://github.com/sekineh">Hideki Sekine</a> and <a href="https://github.com/nerdyvaishali">Vaishali Thakkar</a> have landed initial support for an <a href="https://github.com/rust-lang/rust/pull/52465">Embedded CI Harness</a> in the <a href="https://github.com/rust-lang/rust"><code>rust-lang/rust</code></a> repo as part of the <a href="http://reach.rust-lang.org/">Increasing Rust's Reach</a> project. This opens the door for tests that will help prevent regressions in <code>rustc</code> and <code>cargo</code> for ARM Cortex-M targets</li>
+<li><a href="https://github.com/rust-lang-nursery/stdsimd/pull/518">CMSIS intrinsics</a> for ARM Cortex processors have landed in <a href="https://github.com/rust-lang-nursery/stdsimd">stdsimd</a>. Check out the <a href="https://doc.rust-lang.org/nightly/core/arch/arm/index.html">the docs</a> in nightly soon<sup>†</sup> for info, thanks to <a href="https://github.com/paoloteti">Paolo Teti</a> and <a href="https://github.com/japaric">japaric</a>!</li>
+<li><a href="https://github.com/ashleygwilliams">Ashley Williams</a> released <a href="https://crates.io/crates/cargo-generate">cargo-generate</a>, a CLI tool for generating Cargo projects from a template, reducing the need to manually write boilerplate code. If you write some embedded templates, <a href="https://twitter.com/rustembedded">let us know</a>!</li>
+</ul>
+<p>†: The CMSIS intrinsics will show up in the docs after the next successful nightly build (after 2018-07-30)</p>
+<h2 id="embedded-projects">Embedded Projects</h2>
+<p>If you have an embedded project or blog post you would like to have featured in the Embedded WG Newsletter, make sure to mention it on the tracking issue for <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/134">the next newsletter</a>, we would love to show it off!</p>
+<ul>
+<li><a href="https://github.com/djmcgill">David McGillicuddy</a> has released his crate, <a href="https://crates.io/crates/eight-segment">eight-segment</a>, an <code>embedded-hal</code> driver for displaying digits on 8 segment displays like the HDSP H-101</li>
+<li><a href="https://github.com/jamwaffles">James Waples</a> announced the newest release of his <a href="https://crates.io/crates/embedded-graphics">embedded-graphics</a> library <a href="https://twitter.com/jam_waffles/status/1022837939041132545">in a tweet</a>. This version fixes some small issues, as well as provides functionality to save memory</li>
+<li><a href="https://github.com/roosmaa">Mart Roosmaa</a> released <a href="https://github.com/roosmaa/bolos-rs">bolos-rs</a>, a 3rd party Rust SDK for the Ledger Nano cryptocurrency wallet. Check out his <a href="https://medium.com/@roosmaa/bringing-rust-to-ledger-hardware-wallet-ccf1356a7de1">Medium post</a> for more info!</li>
+<li>The <a href="https://crates.io/crates/cc1101">cc1101</a> crate can now recieve radio packets! Check out <a href="https://www.reddit.com/r/rust/comments/8zk03w/cc1101_crate_can_now_receive_radio_packets/">the reddit post</a> by <a href="https://github.com/dsvensson">Daniel Svensson</a>, as well as <a href="https://dsvensson.github.io/posts/2018-07-13-Electrosmog-trapping-with-CC1101.html#article">his blog post</a> for more info</li>
+</ul>
+<h3 id="embedded-hal-ecosystem-crates"><code>embedded-hal</code> Ecosystem Crates</h3>
+<p>As part of the <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/39">Weekly Driver Initiative</a>, crates that are part of the <code>embedded-hal</code> ecosystem are now tracked in the <a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a> repository. Here is a current snapshot of what is available there:</p>
+<table><thead><tr><th style="text-align: left">Type</th><th style="text-align: left">Status</th><th style="text-align: left">Count</th><th style="text-align: left">Diff</th></tr></thead><tbody>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#device-crates">Device Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">14</td><td style="text-align: left">0</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates">HAL Impl Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">11</td><td style="text-align: left">0</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#board-support-crates">Board Support Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">8</td><td style="text-align: left">+2</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#driver-crates">Driver Crates Released</a></td><td style="text-align: left">released</td><td style="text-align: left">11</td><td style="text-align: left">+2</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#wip">Driver Crates WIP</a></td><td style="text-align: left">WIP</td><td style="text-align: left">35</td><td style="text-align: left">+5</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#no-std-crates">no-std crates</a></td><td style="text-align: left">released</td><td style="text-align: left">12</td><td style="text-align: left">+12</td></tr>
+</tbody></table>
+<h2 id="help-wanted">Help Wanted</h2>
+<ul>
+<li>The Embedded-WG is looking for someone to write an <a href="https://github.com/rust-lang-nursery/embedded-wg/issues/63#issuecomment-408509178">RFC for ARM Intrinsics</a> to get them stabilized</li>
+<li><a href="https://github.com/thejpster">Jonathan Pallant</a> is looking for ideas to implement for the Monotron project. Check out the <a href="http://railwayelectronics.blogspot.com/2018/07/where-next-for-monotron.html">monotron blog post</a> for more details!</li>
+<li>The <a href="https://github.com/japaric/libm#libm">libm</a> project is looking for help with <a href="https://github.com/japaric/libm/milestone/3">refactoring</a> in order to better support chips without hardware double-floating-point support</li>
+</ul>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">[m]</a>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+    <a href="https://trappitsch.github.io/rust-embedded-www/rss.xml" target="_blank">
+      <i class="fa-solid fa-rss"></i>
+    </a>
+
+</footer>
+</body>
+</html>

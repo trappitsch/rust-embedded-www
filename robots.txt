@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Allow: /
+Sitemap: https://trappitsch.github.io/rust-embedded-www/sitemap.xml

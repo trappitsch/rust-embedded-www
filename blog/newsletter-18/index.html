@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Embedded Working Group Newsletter - 18 | Rust Embedded Working Group</title>
+  <meta name="title" content="The Embedded Working Group Newsletter - 18">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link rel="alternate" type="application/rss+xml" title="Rust Embedded Working Group" href="https://trappitsch.github.io/rust-embedded-www/rss.xml">
+  <style>
+    :root {
+    --width: 800px;
+    --font-main: Verdana, sans-serif;
+    --font-secondary: Verdana, sans-serif;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #303030;
+    --text-color: #515151;
+    --link-color: #268BD2;
+    --visited-color: #268BD2;
+    <!-- --code-background-color: #f2f2f2; -->
+    <!-- --code-color: #e00; -->
+    --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #202020;
+      --heading-color: #EEEEEE;
+      --text-color: #FFFFFF;
+      --link-color: #6ACFF6;
+      --visited-color: #6ACFF6;
+      <!-- --code-background-color: #000000; -->
+      <!-- --code-color: #0e0; -->
+      --blockquote-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  nav span.active {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    display: block;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 2px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+  }
+
+  blockquote {
+    border-left: 1px solid #999;
+    color: var(--code-color);
+    padding-left: 20px;
+    font-style: italic;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  .highlight,
+  .code {
+    padding: 1px 15px;
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    border-radius: 3px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  /* blog post list */
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  .tags {
+    font-size: smaller;
+  }
+
+  .footnote-definition {
+    display: flex;
+    margin-top: 1em;
+  }
+  .footnote-definition-label {
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
+  }
+  .footnote-definition-label::after {
+    content: "."
+  }
+  .footnote-definition > p {
+    margin: 0;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/blog/">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>The Embedded Working Group Newsletter - 18</h1>
+      <p>
+        <i>
+          <time datetime="2019-07-02T00:00:00+00:00" pubdate>2019-07-02</time>
+        </i>
+      </p>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-18/#the-winner-of-the-chat-vote-matrix">The winner of the Chat Vote: Matrix</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-18/#highlights">Highlights</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-18/#embedded-projects">Embedded Projects</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/blog/newsletter-18/#embedded-hal-ecosystem-crates">embedded-hal Ecosystem Crates</a>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <p>This is the eighteenth newsletter of the <a href="https://github.com/rust-embedded/wg">Embedded WG</a> where we highlight new progress, celebrate cool projects, thank the community, and advertise projects that need help!</p>
+<!-- TODO uncomment -->
+<!-- Discuss on [users.rust-lang.org], [on twitter], or [on reddit]! -->
+<!-- [users.rust-lang.org]: https://example.org/#TODO -->
+<!-- [on twitter]: https://example.org/#TODO -->
+<!-- [on reddit]: https://example.org/#TODO -->
+<span id="continue-reading"></span><!-- If you want to mention something in [the next newsletter], send us a pull request! -->
+<!-- [the next newsletter]: https://github.com/rust-embedded/blog/edit/master/content/${TODO}.md -->
+<h2 id="the-winner-of-the-chat-vote-matrix">The winner of the Chat Vote: Matrix</h2>
+<p>About a month ago, due to Mozilla's plans to discontinue Mozilla IRC, we released <a href="https://github.com/rust-embedded/wg/blob/master/rfcs/0351-chat-vote.md">RFC 0351: Chat Vote</a> and started a <a href="https://github.com/rust-embedded/wg/issues/357">public vote</a> on which chat platform to use for the Rust Embedded Working Group in the future.</p>
+<p>The winner of that vote was <strong>Matrix</strong>, with 160 votes, followed by IRC with 103 votes and Discord with 74 votes. As Matrix has won by more than 3 votes, it will become the new official chat platform for Rust Embedded! The name of our new channel is <a href="https://matrix.to/#/#rust-embedded:matrix.org"><code>#rust-embedded:matrix.org</code></a>, and you can join it right now using a client like <a href="https://about.riot.im/">Riot</a>.</p>
+<p>We will be trialling the new Matrix channel for the next two weeks, using it as our primary and official communication channel. After the trial period, we will evaluate any issues that came up during it, and decide how to proceed. More details about the organization of the channel can be found in the <a href="https://github.com/rust-embedded/wg/blob/matrix/ops/matrix.md">operational notes</a>.</p>
+<p>Since IRC ended in second place, and it's our current platform, we'll also be establishing a bridge between the Matrix channel and IRC during the trial. This way, users have the option to continue using IRC if they so desire.</p>
+<p>To avoid the administrative overhead of having to switch bridged channels later, we will soon bridge directly to the <code>#rust-embedded</code> channel on Freenode, <em>not</em> to the Mozilla IRC channel. The bridge will be activated once we've worked out the Freenode channel registration.</p>
+<p>While Matrix is a federated protocol, we are not planning on running our own infrastructure for now - instead, we will be using the <code>matrix.org</code> IRC bridge, and users are free to register on <code>matrix.org</code> or any other homeserver of their choosing. If this turns out to be a problem during the trial period, we may reconsider this decision.</p>
+<p>We're also looking into a static log viewer, that would allow us to publish search-engine-indexable channel logs for public reading, similar to the public logs that we currently have. This may require us to self-host a static log generator such as <a href="https://github.com/matrix-org/matrix-static">matrix-static</a>. Suggestions for other solutions are welcome!</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li>
+<p>We've had a bunch of Embedded Rust related events over the past couple of months. EWG member @thejpster was at ACCU 2019 (the Association of C and C++ Users Annual Conference), in Bristol, UK, on 12 April, delivering a talk on Embeddded Rust and the Monotron. Jonathan was then speaking at the Centre for Computing History in Cambridge, UK on 18 April, followed by hosting Oxidize at the end of April! Next up, Monotron is visiting Rust Conf in Portland, USA in late August. Don't forget, if you've been giving or attending Embedded Rust talks, drop us a line for the next newsletter!</p>
+</li>
+<li>
+<p><a href="https://rust-embedded.github.io/showcase/">The embedded showcase</a> gained 3 new entries! We are still looking for cool embedded projects to serve that can serve as examples of what can be done in Rust. Don't hesitate to <a href="https://github.com/rust-embedded/showcase#submit-your-project">submit yours</a>!</p>
+</li>
+</ul>
+<h2 id="embedded-projects">Embedded Projects</h2>
+<ul>
+<li>
+<p><a href="https://github.com/laanwj">@laanwj</a>, <a href="https://github.com/Disasm">@Disasm</a> and <a href="https://github.com/burrbull">@burrbull</a> are working on <a href="https://github.com/riscv-rust/k210-crates">Rust support for the Kendryte K210 RISC-V chips</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/Disasm">@Disasm</a> and <a href="https://github.com/almindor">@almindor</a> updated <a href="https://github.com/riscv-rust/riscv-rust-quickstart">riscv-rust-quickstart</a>: now you can run Rust on the HiFive1 Rev B board.</p>
+</li>
+<li>
+<p><a href="https://github.com/Disasm">@Disasm</a> released <a href="https://crates.io/crates/stm32-usbd">stm32-usbd</a>: a fork of <a href="https://github.com/mvirkkunen/stm32f103xx-usb">stm32f103xx-usb</a> adopted for multiple STM32 device families.</p>
+</li>
+</ul>
+<h2 id="embedded-hal-ecosystem-crates"><code>embedded-hal</code> Ecosystem Crates</h2>
+<p>As part of the <a href="https://github.com/rust-embedded/wg/issues/39">Weekly Driver Initiative</a>, crates that are part of the <code>embedded-hal</code> ecosystem are now tracked in the <a href="https://github.com/rust-embedded/awesome-embedded-rust">Awesome Embedded Rust</a> repository. Here is a current snapshot of what is available there:</p>
+<!-- TODO fill in the numbers before release -->
+<table><thead><tr><th style="text-align: left">Type</th><th style="text-align: left">Status</th><th style="text-align: left">Count</th><th style="text-align: left">Diff</th></tr></thead><tbody>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#peripheral-access-crates">Peripheral Access Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">22</td><td style="text-align: left">+4</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#hal-implementation-crates">HAL Impl Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">25</td><td style="text-align: left">+6</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#board-support-crates">Board Support Crates</a></td><td style="text-align: left">released</td><td style="text-align: left">18</td><td style="text-align: left">+5</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#driver-crates">Driver Crates Released</a></td><td style="text-align: left">released</td><td style="text-align: left">25</td><td style="text-align: left">+4</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#wip">Driver Crates WIP</a></td><td style="text-align: left">WIP</td><td style="text-align: left">67</td><td style="text-align: left">+4</td></tr>
+<tr><td style="text-align: left"><a href="https://github.com/rust-embedded/awesome-embedded-rust#no-std-crates">no-std crates</a></td><td style="text-align: left">released</td><td style="text-align: left">26</td><td style="text-align: left">+1</td></tr>
+</tbody></table>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">[m]</a>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+    <a href="https://trappitsch.github.io/rust-embedded-www/rss.xml" target="_blank">
+      <i class="fa-solid fa-rss"></i>
+    </a>
+
+</footer>
+</body>
+</html>
