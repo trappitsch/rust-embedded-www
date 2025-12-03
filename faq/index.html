@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions | Rust Embedded Working Group</title>
+  <meta name="title" content="Frequently Asked Questions">
+<meta name="description" content="Rust Embedded Working Group
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <style>
+  @font-face {
+    font-family: "FiraSans";
+    src: url("https://trappitsch.github.io/rust-embedded-www/fonts/fira_sans/FiraSans-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FiraSans";
+    src: url("https://trappitsch.github.io/rust-embedded-www/fonts/fira_sans/FiraSans-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+  --width: 800px;
+  --font-main: "FiraSans", Helvetica, Arial, sans-serif;
+  --font-secondary: "FiraSans", Helvetica, Arial, sans-serif;
+  --font-scale: 1em;
+  --background-color: #fff;
+  --heading-color: #202020;
+  --text-color: #000000;
+  --link-color: #1a78c0;
+  --visited-color: #1a78c0;
+  --blockquote-color: #222;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #202020;
+    --heading-color: #EEEEEE;
+    --text-color: #FFFFFF;
+    --link-color: #6ACFF6;
+    --visited-color: #6ACFF6;
+    --blockquote-color: #ccc;
+  }
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--font-scale);
+  margin: auto;
+  padding: 20px;
+  max-width: var(--width);
+  text-align: left;
+  background-color: var(--background-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-main);
+  color: var(--heading-color);
+}
+
+a {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+nav a {
+  margin-right: 8px;
+}
+
+nav span.active {
+  font-weight: bold;
+  margin-right: 10px;
+}
+strong,
+b {
+  color: var(--heading-color);
+}
+
+button {
+  margin: 0;
+  cursor: pointer;
+}
+
+main {
+  line-height: 1.6;
+}
+
+table {
+  width: 100%;
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed;
+}
+
+img {
+  max-width: 100%;
+}
+
+pre code {
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  display: block;
+  padding: 20px;
+  white-space: pre-wrap;
+  font-size: 0.875rem;
+  overflow-x: auto;
+}
+
+code {
+  font-family: monospace;
+  padding: 2px;
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  border-radius: 3px;
+}
+
+blockquote {
+  border-left: 1px solid #999;
+  color: var(--code-color);
+  padding-left: 20px;
+  font-style: italic;
+}
+
+footer {
+  padding: 25px 0;
+  text-align: center;
+}
+
+.title:hover {
+  text-decoration: none;
+}
+
+.title h1 {
+  font-size: 1.5em;
+}
+
+.inline {
+  width: auto !important;
+}
+
+.highlight,
+.code {
+  padding: 1px 15px;
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  border-radius: 3px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  overflow-x: auto;
+}
+
+/* blog post list */
+ul.blog-posts {
+  list-style-type: none;
+  padding: unset;
+}
+
+ul.blog-posts li {
+  display: flex;
+}
+
+ul.blog-posts li span {
+  flex: 0 0 130px;
+}
+
+ul.blog-posts li a:visited {
+  color: var(--visited-color);
+}
+
+.icon {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  color: var(--text-color);
+}
+
+.tags {
+  font-size: smaller;
+}
+
+.footnote-definition {
+  display: flex;
+  margin-top: 1em;
+}
+.footnote-definition-label {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  vertical-align: baseline;
+}
+.footnote-definition-label::after {
+  content: "."
+}
+.footnote-definition > p {
+  margin: 0;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+  <p style="color:#ff0000; font-weight:bold;">
+    NOTE: PROPOSAL FOR REWG. THIS IS NOT THE OFFICIAL WEBSITE AND IN NO WAY ENDORSED BY THE REWG.
+  </p>
+  <a href="https://trappitsch.github.io/rust-embedded-www/" class="title">
+    <!-- add image on the right -->
+      <h1 style=" display: flex; align-items: center; justify-content: space-between; margin: 0;">
+        Rust Embedded Working Group
+            <img src="https://trappitsch.github.io/rust-embedded-www/ewg-logo-blue-white-on-transparent.svg" alt="Logo" style="height: 100px; margin-left: 10px;">
+    </h1>
+  </a>
+  <nav aria-label="site">
+      <a href="https://trappitsch.github.io/rust-embedded-www/">Home</a>
+      <a href="https://trappitsch.github.io/rust-embedded-www/bookshelf/">Bookshelf</a>
+        <a href="https:&#x2F;&#x2F;blog.rust-embedded.org&#x2F;", target="_blank">Blog</a>
+        <a href="http:&#x2F;&#x2F;showcase.rust-embedded.org&#x2F;", target="_blank">Showcase</a>
+  </nav>
+</header>
+<h1>Frequently Asked Questions</h1>
+    <details open>
+      <summary>Table of contents</summary>
+    <ul>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#does-rust-support-my-device">Does Rust support my device?</a>
+        <ul>
+            <li>
+              <a href="https://trappitsch.github.io/rust-embedded-www/faq/#short-answer">Short answer</a>
+            </li>
+            <li>
+              <a href="https://trappitsch.github.io/rust-embedded-www/faq/#long-answer">Long answer</a>
+            </li>
+        </ul>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#when-will-rust-support-the-avr-architecture">(When) will Rust support the AVR architecture?</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#when-will-rust-support-the-xtensa-architecture">(When) will Rust support the Xtensa architecture?</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#my-embedded-rust-program-is-too-big">My embedded Rust program is too big!</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#i-m-trying-to-follow-the-book-but-my-program-won-t-flash">I&#x27;m trying to follow the book but my program won&#x27;t flash</a>
+        </li>
+        <li>
+          <a href="https://trappitsch.github.io/rust-embedded-www/faq/#my-program-just-halts-without-connected-debugger-what-am-i-doing-wrong">My program just halts without connected debugger. What am I doing wrong?</a>
+        <ul>
+            <li>
+              <a href="https://trappitsch.github.io/rust-embedded-www/faq/#short-answer-1">Short answer</a>
+            </li>
+            <li>
+              <a href="https://trappitsch.github.io/rust-embedded-www/faq/#long-answer-1">Long answer</a>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </details>
+  <main>
+    <h1 id="does-rust-support-my-device">Does Rust support my device?</h1>
+<h2 id="short-answer">Short answer</h2>
+<p>As of 2018-09-18 the Rust compiler supports cross compiling to these embedded
+architectures (see <code>rustup target list</code>):</p>
+<ul>
+<li>ARM Cortex-M (since 1.27)
+<ul>
+<li><code>thumbv6m-none-eabi</code>, Cortex-M0</li>
+<li><code>thumbv7m-none-eabi</code>, Cortex-M3</li>
+<li><code>thumbv7em-none-eabi</code>, Cortex-M4 and Cortex-M7</li>
+<li><code>thumbv7em-none-eabihf</code>, Cortex-M4F and Cortex-M7F</li>
+</ul>
+</li>
+<li>ARM Cortex-R (1.30-beta)
+<ul>
+<li><code>armebv7r-none-eabi</code>, big endian Cortex-R4 and Cortex-R5</li>
+<li><code>armebv7r-none-eabihf</code>, big endian Cortex-R4F and Cortex-R5F</li>
+<li><code>armv7r-none-eabi</code>, little endian Cortex-R4 and Cortex-R5</li>
+<li><code>armv7r-none-eabihf</code>, little endian Cortex-R4F and Cortex-R5F</li>
+</ul>
+</li>
+<li>ARM Linux
+<ul>
+<li>ARMv5TE (e.g. ARM926EJ-S),</li>
+<li>ARMv6 (e.g. ARM11 as found in the Raspberry Pi 1 / Zero),</li>
+<li>ARMv7-A (e.g. Cortex-A8 as found in the Beaglebones),</li>
+<li>and ARMv8 (e.g. Cortex-A53 as found in the ODROID-C2) ...</li>
+<li>... in GNU and MUSL flavors and in soft float and hard float variants;</li>
+<li>notably, support for ARMv4T (e.g. ARM7) and older versions is missing.</li>
+</ul>
+</li>
+<li>RISCV (1.30-beta)
+<ul>
+<li><code>riscv32imac-unknown-none-elf</code>, RV32I base instruction set with M, A and C
+extensions</li>
+<li><code>riscv32imc-unknown-none-elf</code>, RV32I base instruction set with M, and C
+extensions</li>
+</ul>
+</li>
+</ul>
+<p><code>rustc</code> also supports code generation for the MSP430 architecture (see <code>rustc --print target-list</code>).</p>
+<p>In general, ARM Cortex-M and ARM Linux have the most mature ecosystems whereas
+the ARM Cortex-R, MSP430 and RISCV ecosystems are in early stages or not as
+mature.</p>
+<p>For specific device support check <a href="https://github.com/rust-embedded/awesome-embedded-rust">awesome-embedded-rust</a>.</p>
+<h2 id="long-answer">Long answer</h2>
+<p>We can talk about support at different levels: does the compiler support my
+device? does the crate ecosystem support my device?</p>
+<p>Let's start with compiler support. The compiler supports architectures or ISA
+(Instruction Set Architectures) rather than specific devices. Compiler support
+can be further divided in two levels: compilation target support and
+architecture support.</p>
+<h3 id="compilation-target-support">Compilation target support</h3>
+<p>By compilation target support we mean that you can readily cross compile a crate
+for a certain <em>compilation target</em> using Cargo. To keep the default installation
+slim only the native compilation target is installed and other targets have to
+be installed using the <code>rustup target</code> subcommand. If <code>rustup target list</code> lists
+a compilation target that matches your device then Cargo supports cross
+compiling to your device.</p>
+<p>For example, let's say we want to know if <code>rustc</code> supports cross compiling to
+32-bit RISCV. We check <code>rustup target list</code></p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$</span><span> rustup default 1.29.0
+</span><span style="color:#50fa7b;">$</span><span> rustup target list </span><span style="color:#ff79c6;">| </span><span style="color:#50fa7b;">grep</span><span style="font-style:italic;color:#ffb86c;"> -i</span><span> riscv </span><span style="color:#ff79c6;">|| </span><span style="color:#8be9fd;">echo</span><span> not supported
+</span><span style="color:#50fa7b;">not</span><span> supported
+</span><span>
+</span><span style="color:#50fa7b;">$</span><span> rustup default nightly-2018-09-18 </span><span style="color:#6272a4;"># this date is just an example
+</span><span style="color:#50fa7b;">$</span><span> rustc</span><span style="font-style:italic;color:#ffb86c;"> -V
+</span><span style="color:#50fa7b;">rustc</span><span> 1.30.0-nightly (2224a42c3 2018-09-17)
+</span><span style="color:#50fa7b;">$</span><span> rustup target list </span><span style="color:#ff79c6;">| </span><span style="color:#50fa7b;">grep</span><span style="font-style:italic;color:#ffb86c;"> -i</span><span> riscv </span><span style="color:#ff79c6;">|| </span><span style="color:#8be9fd;">echo</span><span> not supported
+</span><span style="color:#50fa7b;">riscv32imac-unknown-none-elf
+</span><span style="color:#50fa7b;">riscv32imc-unknown-none-elf
+</span></code></pre>
+<p>This indicates that 1.29 doesn't support 32-bit RISCV but that 1.30 will.</p>
+<p>Once you have installed a compilation target using <code>rustup target add $T</code> you'll
+be able to cross compile crates to it using <code>cargo build --target $T</code>.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$</span><span> rustup target add riscv32imac-unknown-none-elf
+</span><span style="color:#50fa7b;">$</span><span> cargo build</span><span style="font-style:italic;color:#ffb86c;"> --target</span><span> riscv32imac-unknown-none-elf
+</span></code></pre>
+<h3 id="architecture-support">Architecture support</h3>
+<p>If your device doesn't appear in <code>rustup target list</code> that doesn't mean that
+<code>rustc</code> doesn't support your device at all. It could still support code
+generation for your device <em>architecture</em>. <code>rustc</code> uses LLVM to generate machine
+code; if the LLVM backend for your device architecture is enabled in <code>rustc</code>
+then <code>rustc</code> can produce assembly and/or object files for that architecture.</p>
+<p>The easiest way to list the architectures that LLVM supports is to run
+<code>cargo objdump -- -version</code> where <code>cargo-objdump</code> is one of <a href="https://github.com/rust-embedded/cargo-binutils"><code>cargo-binutils</code></a>
+subcommands.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$</span><span> rustup default nightly-2018-09-18 </span><span style="color:#6272a4;"># this date is just an example
+</span><span style="color:#50fa7b;">$</span><span> rustup component add llvm-tools
+</span><span style="color:#50fa7b;">$</span><span> cargo install cargo-binutils
+</span><span>
+</span><span style="color:#50fa7b;">$</span><span> cargo objdump</span><span style="color:#ff79c6;"> --</span><span> -version
+</span><span style="color:#50fa7b;">LLVM</span><span> (http://llvm.org/)</span><span style="color:#8be9fd;">:
+</span><span>  </span><span style="color:#50fa7b;">LLVM</span><span> version 8.0.0svn
+</span><span>  </span><span style="color:#50fa7b;">Optimized</span><span> build.
+</span><span>  </span><span style="color:#50fa7b;">Default</span><span> target: x86_64-unknown-linux-gnu
+</span><span>  </span><span style="color:#50fa7b;">Host</span><span> CPU: skylake
+</span><span>
+</span><span>  </span><span style="color:#50fa7b;">Registered</span><span> Targets:
+</span><span>    </span><span style="color:#50fa7b;">aarch64</span><span>    - AArch64 (little endian)
+</span><span>    </span><span style="color:#50fa7b;">aarch64_be</span><span> - AArch64 (big endian)
+</span><span>    </span><span style="color:#50fa7b;">arm</span><span>        - ARM
+</span><span>    </span><span style="color:#50fa7b;">arm64</span><span>      - ARM64 (little endian)
+</span><span>    </span><span style="color:#50fa7b;">armeb</span><span>      - ARM (big endian)
+</span><span>    </span><span style="color:#50fa7b;">hexagon</span><span>    - Hexagon
+</span><span>    </span><span style="color:#50fa7b;">mips</span><span>       - Mips
+</span><span>    </span><span style="color:#50fa7b;">mips64</span><span>     - Mips64 </span><span style="color:#ff79c6;">[</span><span>experimental</span><span style="color:#ff79c6;">]
+</span><span>    </span><span style="color:#50fa7b;">mips64el</span><span>   - Mips64el </span><span style="color:#ff79c6;">[</span><span>experimental</span><span style="color:#ff79c6;">]
+</span><span>    </span><span style="color:#50fa7b;">mipsel</span><span>     - Mipsel
+</span><span>    </span><span style="color:#50fa7b;">msp430</span><span>     - MSP430 </span><span style="color:#ff79c6;">[</span><span>experimental</span><span style="color:#ff79c6;">]
+</span><span>    </span><span style="color:#50fa7b;">nvptx</span><span>      - NVIDIA PTX 32-bit
+</span><span>    </span><span style="color:#50fa7b;">nvptx64</span><span>    - NVIDIA PTX 64-bit
+</span><span>    </span><span style="color:#50fa7b;">ppc32</span><span>      - PowerPC 32
+</span><span>    </span><span style="color:#50fa7b;">ppc64</span><span>      - PowerPC 64
+</span><span>    </span><span style="color:#50fa7b;">ppc64le</span><span>    - PowerPC 64 LE
+</span><span>    </span><span style="color:#50fa7b;">riscv32</span><span>    - 32-bit RISC-V
+</span><span>    </span><span style="color:#50fa7b;">riscv64</span><span>    - 64-bit RISC-V
+</span><span>    </span><span style="color:#50fa7b;">sparc</span><span>      - Sparc
+</span><span>    </span><span style="color:#50fa7b;">sparcel</span><span>    - Sparc LE
+</span><span>    </span><span style="color:#50fa7b;">sparcv9</span><span>    - Sparc V9
+</span><span>    </span><span style="color:#50fa7b;">systemz</span><span>    - SystemZ
+</span><span>    </span><span style="color:#50fa7b;">thumb</span><span>      - Thumb
+</span><span>    </span><span style="color:#50fa7b;">thumbeb</span><span>    - Thumb (big endian)
+</span><span>    </span><span style="color:#50fa7b;">wasm32</span><span>     - WebAssembly 32-bit
+</span><span>    </span><span style="color:#50fa7b;">wasm64</span><span>     - WebAssembly 64-bit
+</span><span>    </span><span style="color:#50fa7b;">x86</span><span>        - 32-bit X86: Pentium-Pro and above
+</span><span>    </span><span style="color:#50fa7b;">x86-64</span><span>     - 64-bit X86: EM64T and AMD64
+</span></code></pre>
+<p>If your device architecture is not there that means <code>rustc</code> doesn't support your
+device. It could be that LLVM doesn't support the architecture (e.g. Xtensa,
+ESP8266's architecture) or that LLVM's support for the architecture is not
+considered stable enough and has not been enabled in <code>rustc</code> (e.g. AVR, the
+architecture most commonly found in Arduino microcontrollers).</p>
+<p>If your device architecture is there then that means that, in principle, <code>rustc</code>
+supports your device. However, an architecture like ARM can be very broad
+covering several ISAs and extensions. Instead, you'll want to work with a
+compilation target tailored to your device. Custom compilation targets are out
+of scope for this document; you should refer to the <a href="https://rust-embedded.github.io/embedonomicon/compiler-support.html">embedonomicon</a> for more
+information.</p>
+<h3 id="crate-ecosystem-support">Crate ecosystem support</h3>
+<p>Crate ecosystem support can range from generic support for the architecture to
+device-specific support. We recommend that you search on crates.io for the
+architecture (e.g. ARM or Cortex-M), for the microcontroller vendor (e.g.
+STM32), for the target device (e.g. STM32F103) and the target development board
+(e.g. STM32F3DISCOVERY). We also suggest that you check the
+<a href="https://github.com/rust-embedded/awesome-embedded-rust">awesome-embedded-rust</a> list and <a href="https://github.com/rust-embedded/wg#organization">the crates maintained by the embedded Working
+Group</a>.</p>
+<h1 id="when-will-rust-support-the-avr-architecture">(When) will Rust support the AVR architecture?</h1>
+<p>As of 2020-07-24 the support for AVR have been merged into the nightly version of
+the official Rust compiler, <code>rustc</code>. See the RFC for merging the <a href="https://github.com/rust-lang/rust/issues/44052#issuecomment-663394401%5D.">avr-rust fork</a>.</p>
+<h1 id="when-will-rust-support-the-xtensa-architecture">(When) will Rust support the Xtensa architecture?</h1>
+<p>As of 2020-08-24 the official Rust compiler, <code>rustc</code>, relies on LLVM for
+generating machine code. It's a requirement that LLVM supports an architecture
+for <code>rustc</code> to support it.</p>
+<p>There is no support for the Xtensa architecture in LLVM proper. You may be able
+to find several forks of LLVM with varying levels of support for the Xtensa
+architecture but <code>rustc</code> will not be able to use any of those forks due to the
+maintenance and infrastructure costs of developing <code>rustc</code> against different
+versions of LLVM.</p>
+<p>TL;DR <code>rustc</code> will support the Xtensa architecture when the official LLVM gains
+support for the Xtensa architecture. As LLVM is a project independent of the
+Rust project we can't give you any estimate on when that might happen. A list of
+submitted patches can be found on this <a href="https://reviews.llvm.org/W486">LLVM dashboard</a>.</p>
+<h1 id="my-embedded-rust-program-is-too-big">My embedded Rust program is too big!</h1>
+<p>We sometimes get questions like this one: "My Rust program is 500 KB but my
+microcontroller only has 16 KB of Flash; how can I make it fit?".</p>
+<p>The first thing to confirm is that correctly measuring the size of your program.
+<code>rustc</code> produces ELF files for most embedded targets. ELF files have metadata
+and contain debug information so measuring their size on disk with e.g. <code>ls -l</code>
+will give you the wrong number.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$ </span><span style="color:#6272a4;"># 500 KB?
+</span><span style="color:#50fa7b;">$</span><span> ls</span><span style="font-style:italic;color:#ffb86c;"> -hl</span><span> target/thumbv7m-none-eabi/debug/app
+</span><span style="color:#50fa7b;">-rwxr-xr-x</span><span> 2 japaric japaric 554K Sep 19 13:37 target/thumbv7m-none-eabi/debug/app
+</span></code></pre>
+<p>The correct way to measure the size of an embedded program is to use the <code>size</code>
+program or the <a href="https://github.com/rust-embedded/cargo-binutils"><code>cargo size</code></a> subcommand.</p>
+<pre data-lang="bash" style="background-color:#282a36;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#50fa7b;">$ </span><span style="color:#6272a4;"># ~ 2 KB of Flash
+</span><span style="color:#50fa7b;">$</span><span> cargo size</span><span style="font-style:italic;color:#ffb86c;"> --bin</span><span> app</span><span style="color:#ff79c6;"> --</span><span> -A
+</span><span>    </span><span style="color:#50fa7b;">Finished</span><span> dev </span><span style="color:#ff79c6;">[</span><span>unoptimized + debuginfo</span><span style="color:#ff79c6;">]</span><span> target(s) </span><span style="color:#50fa7b;">in</span><span> 0.01s
+</span><span style="color:#50fa7b;">app</span><span>  :
+</span><span style="color:#50fa7b;">section</span><span>               size        addr
+</span><span style="color:#50fa7b;">.vector_table</span><span>         1024   0x8000000
+</span><span style="color:#50fa7b;">.text</span><span>                  776   0x8000400
+</span><span style="color:#50fa7b;">.rodata</span><span>                208   0x8000708
+</span><span style="color:#50fa7b;">.data</span><span>                    0  0x20000000
+</span><span style="color:#50fa7b;">.bss</span><span>                     0  0x20000000
+</span><span style="color:#50fa7b;">.debug_str</span><span>          145354         0x0
+</span><span style="color:#50fa7b;">.debug_abbrev</span><span>        11264         0x0
+</span><span style="color:#50fa7b;">.debug_info</span><span>         139259         0x0
+</span><span style="color:#50fa7b;">.debug_macinfo</span><span>          33         0x0
+</span><span style="color:#50fa7b;">.debug_pubnames</span><span>      40901         0x0
+</span><span style="color:#50fa7b;">.debug_pubtypes</span><span>      14326         0x0
+</span><span style="color:#50fa7b;">.ARM.attributes</span><span>         50         0x0
+</span><span style="color:#50fa7b;">.debug_frame</span><span>         21224         0x0
+</span><span style="color:#50fa7b;">.debug_line</span><span>         117666         0x0
+</span><span style="color:#50fa7b;">.debug_ranges</span><span>        63800         0x0
+</span><span style="color:#50fa7b;">.comment</span><span>                75         0x0
+</span><span style="color:#50fa7b;">Total</span><span>               555960
+</span></code></pre>
+<p>Of the standard sections, <code>.vector_table</code>, <code>.text</code>, <code>.rodata</code> and <code>.data</code> will
+occupy Flash / ROM; <code>.bss</code> and <code>.data</code> will occupy RAM; <code>.debug_*</code>,
+<code>.ARM.attributes</code> and <code>.comments</code> can be ignored as they won't be loaded into
+the target device memory. (<code>.data</code> is initially placed in
+Flash / ROM, but copied to RAM during startup to make it writable.) For the other sections you'll have to check your
+dependencies' docs.</p>
+<p>In this example the uploaded software will occupy <code>2008</code> bytes of Flash.</p>
+<p>Note that most (all?) runtime crates, like <code>cortex-m-rt</code>, will check at link
+time that the program fits in the target device memory. If it doesn't fit you'll
+get a linker error and no output binary. So, provided that you correctly entered
+the size of the memory regions of your device then if it links it should fit in
+the target device!</p>
+<p>If you are measuring size using the right method and your program is still too
+big then check out our section on optimizations.</p>
+<blockquote>
+<p><strong>TODO</strong>(resources team) add link to the optimizations section</p>
+</blockquote>
+<h1 id="i-m-trying-to-follow-the-book-but-my-program-won-t-flash">I'm trying to follow the book but my program won't flash</h1>
+<p>It is quite common that by oversight the linker configuration is not suitable
+for the target device. Indications for such a problem are loading errors in <code>gdb</code>:</p>
+<pre style="background-color:#282a36;color:#f8f8f2;"><code><span>(gdb) load
+</span><span>Loading section .vector_table, size 0x400 lma 0x0
+</span><span>Loading section .text, size 0x2064 lma 0x400
+</span><span>Load failed
+</span></code></pre>
+<p>Please note the <code>lma</code> which is the loading address and needs to match up with the
+start address of the flash.</p>
+<p>Similarly <code>openocd</code> will indicate such a problem:</p>
+<pre style="background-color:#282a36;color:#f8f8f2;"><code><span>...
+</span><span>auto erase enabled
+</span><span>Info : device id = 0x10036422
+</span><span>Info : flash size = 256kbytes
+</span><span>Warn : no flash bank found for address 0
+</span><span>wrote 0 bytes from file target/thumbv7em-none-eabihf/debug/examples/hello in 0.001434s (0.000 KiB/s)
+</span></code></pre>
+<p>If you see such a message you will need to check your linker configuration, usually in
+<code>memory.x</code> for the correct addresses (and ideally also sizes). Please also note that
+after a change you will need to <code>cargo clean</code> and rebuild to use the changed addresses.</p>
+<h1 id="my-program-just-halts-without-connected-debugger-what-am-i-doing-wrong">My program just halts without connected debugger. What am I doing wrong?</h1>
+<h2 id="short-answer-1">Short answer</h2>
+<p>If you're using <code>semihosting</code>, switch to a different input / output mechanism.</p>
+<h2 id="long-answer-1">Long answer</h2>
+<p>An embedded MCU will typically stop  working if exceptions (which is the MCUs way
+of signalling special or abnormal events) occur which are not handled and cleared,
+either by an exception handler or a connected debugger. The latter case is especially
+interesting because there's a method of interacting with a connected computer
+dubbed <code>semihosting</code> which will work iff a debugger is properly connected
+and debugging software running and correctly set up. This method uses special
+processor instructions (e.g. a service or breakpoint call) to alert the connected
+system about input and/or output requests from the device. If no debugger is
+available to handle such a situation, the system either wait indefinitely or
+generate an even stronger exception which can only be cleared by a reset.</p>
+<p>There're two common scenarios which cause such a lockup unintentionally:</p>
+<ul>
+<li>The use of semihosting as input / output channel, e.g. via <code>cortex-m-semihosting</code> crate</li>
+<li>A <code>panic</code> in the program with the <code>panic-semihosting</code> crate in use, however the
+occurence of a <code>panic</code> means that the program is defunct anyway</li>
+</ul>
+<p>Please note that examples may make use of the <code>semihosting</code> concept but this
+should not be used in production setups due to the lack of connected debugger and
+a host running appropriate debugging software. The use of a serial interface is
+often a better choice. However if you just would like to see your example running
+please make sure your setup is ready to deal with the <code>semihosting</code> requirements.</p>
+
+  </main>
+  <p>
+  </p>
+<link rel="stylesheet" href="https://trappitsch.github.io/rust-embedded-www/fonts/fontawesome/css/all.min.css">
+<footer>
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-embedded", target="_blank">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <strong>
+      <!-- This is the Matrix icon as an inline SVG -->
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <a href="https:&#x2F;&#x2F;matrix.to&#x2F;#&#x2F;#rust-embedded:matrix.org", target="_blank">
+          <path
+              fill="currentColor"
+              d="
+                M .632 .55 v 22.9 H 2.28 V 24 H 0 V 0 h 2.28 v .55
+                zm
+                7.043 7.26 v 1.157 h .033
+                  c .309 -.443 .683 -.784 1.117 -1.024
+                  .433 -.245 .936 -.365 1.5 -.365
+                  .54 0 1.033 .107 1.481 .314
+                  .448 .208 .785 .582 1.02 1.108
+                  .254 -.374 .6 -.706 1.034 -.992
+                  .434 -.287 .95 -.43 1.546 -.43
+                  .453 0 .872 .056 1.26 .167
+                  .388 .11 .716 .286 .993 .53
+                  .276 .245 .489 .559 .646 .951
+                  .152 .392 .23 .863 .23 1.417
+                  v 5.728 h -2.349 V 11.52
+                  c 0 -.286 -.01 -.559 -.032 -.812
+                  a 1.755 1.755 0 0 0 -.18 -.66
+                  1.106 1.106 0 0 0 -.438 -.448
+                  c -.194 -.11 -.457 -.166 -.785 -.166
+                  -.332 0 -.6 .064 -.803 .189
+                  a 1.38 1.38 0 0 0 -.48 .499
+                  1.946 1.946 0 0 0 -.231 .696
+                  5.56 5.56 0 0 0 -.06 .785
+                  v 4.768 h -2.35 v -4.8
+                  c 0 -.254 -.004 -.503 -.018 -.752
+                  a 2.074 2.074 0 0 0 -.143 -.688
+                  1.052 1.052 0 0 0 -.415 -.503
+                  c -.194 -.125 -.476 -.19 -.854 -.19
+                  -.111 0 -.259 .024 -.439 .074
+                  -.18 .051 -.36 .143 -.53 .282
+                  -.171 .138 -.319 .337 -.439 .595
+                  -.12 .259 -.18 .6 -.18 1.02
+                  v 4.966 H 5.46 V 7.81
+                zm
+                15.693 15.64 V .55 H 21.72 V 0 H 24 v 24 h -2.28 v -.55
+                z"
+          />
+        </a>
+      </svg>
+    </strong>
+    <a href="https:&#x2F;&#x2F;hachyderm.io&#x2F;@rustembedded", target="_blank">
+      <i class="fa-brands fa-mastodon"></i>
+    </a>
+
+</footer>
+</body>
+</html>
